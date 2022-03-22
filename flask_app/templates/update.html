@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- CSS only -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+<link rel="stylesheet" href="{{ url_for('static', filename = 'css/bootstrap.css') }}">
+    <title>Dashboard</title>
+</head>
+<body>
+    <div class="navbar nb">
+        <div>
+            <h1>Arbotrary</h1>
+            <h6>A site to track randomly planted trees</h6>
+        </div>
+        
+        <h1>Welcome {{user.first_name}}!</h1>
+        <div class="bt-group">
+            <a href="/mytrees" class="btn btn-outline-info btn-lg navbar-btn btn-C">My Trees</a>
+            <a href="/dashboard" class="btn btn-outline-primary btn-lg navbar-btn btn-C">Dashboard</a>
+            <a href="/logout" class="btn btn-outline-danger btn-lg navbar-btn btn-L">Logout</a>
+        </div>
+    </div>
+    <div>
+        <h1 class="t-tittle">Re-Plant your Tree</h1>
+        <div class="form-group mx-auto form  card col-6">
+            <form action="/update/{{arb.id}}" method = POST>
+                <div class="">
+                    <div class="box-form1">
+                        {% with messages = get_flashed_messages() %}              
+                            {% if messages %}                                       
+                                {% for message in messages %}                      
+                                    <p class="error">{{message}}</p>                
+                                {% endfor %}
+                            {% endif %}
+                        {% endwith %}
+                        <div>
+                            <label for="species">Species</label>
+                            <input class="form-control" type="text" name="species" placeholder="Species" value="{{arb.species}}">
+                        </div>
+                        <div>
+                            <label for="location">Location</label>
+                            <input class="form-control" type="text" name="location" placeholder="Enter location" value="{{arb.location}}">
+                        </div>
+                    </div>
+                        <div>
+                            <label for="reason">Reason</label>
+                            <input class="form-control" type="text" name="reason" value="{{arb.reason}}" >
+                        </div>
+                        <div>
+                            <label for="date">Date of Sighting</label>
+                            <input class="form-control" type="date" name="date">
+                        </div>
+
+                </div>
+                <button class="btn btn-lg my-4 btn-success">Plant Tree</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
